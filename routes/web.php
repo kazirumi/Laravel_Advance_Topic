@@ -2,9 +2,11 @@
 
 use App\Postcard;
 use App\PostCardSendingService;
+use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\Route;
 use \App\Http\Controllers\ChannelController;
 use \App\Http\Controllers\PostController;
+use Illuminate\Support\Str;
 
 /*
 |--------------------------------------------------------------------------
@@ -18,6 +20,14 @@ use \App\Http\Controllers\PostController;
 */
 
 Route::get('/', function () {
+    //macro example
+    //dd(Str::partNumber('bjsjkdbbjhsfd'));
+    //dd(Str::prefix('bjsjkdbbjhsfd','CDEF__'));
+
+
+    //macro example
+    //return Response::errorJson('rumi personal error');
+
     return view('welcome');
 });
 

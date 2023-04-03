@@ -6,11 +6,14 @@ use App\Billing\BankPaymentGateway;
 use App\Billing\CreditCardPaymentGateway;
 use App\Billing\PaymentGatewayContract;
 use App\Http\View\Composers\ChannelsComposer;
+use App\Mixins\StrMixins;
 use App\Models\Channel;
 use App\PostCardSendingService;
+use Illuminate\Routing\ResponseFactory;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Support\Str;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -55,6 +58,14 @@ class AppServiceProvider extends ServiceProvider
             return new PostCardSendingService('bd',100,200);
         });
 
+        //macro example
+        Str::mixin(new StrMixins());
 
+        ResponseFactory::macro('errorJson',function ($message='There is an default error'){
+            return [
+                'errorMessage'=>$message,
+                'statusCode'=>123,
+            ];
+        });
     }
 }
