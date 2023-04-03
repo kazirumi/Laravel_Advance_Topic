@@ -1,5 +1,7 @@
 <?php
 
+use App\Postcard;
+use App\PostCardSendingService;
 use Illuminate\Support\Facades\Route;
 use \App\Http\Controllers\ChannelController;
 use \App\Http\Controllers\PostController;
@@ -21,3 +23,14 @@ Route::get('/', function () {
 
 Route::get('channels',[ChannelController::class,'index']);
 Route::get('postForm',[PostController::class,'create']);
+
+// facades example
+Route::get('postcards',function (){
+        $postcardservice=new PostCardSendingService('bd',100,200);
+
+        $postcardservice->hello('Hellow from Bangladesh Dhaka with huge respect','test@test.com');
+});
+
+Route::get('/facades',function (){
+    Postcard::hello('This is from Facades CHill!!!!','rumi@gmail.com');
+});
