@@ -2,8 +2,12 @@
 
 namespace App\Models;
 
+use App\QueryFilters\Even;
+use App\QueryFilters\MaxCount;
+use App\QueryFilters\Sort;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Pipeline\Pipeline;
 
 class Post extends Model
 {
@@ -21,5 +25,18 @@ class Post extends Model
     public function tags()
     {
         return $this->morphToMany(Tag::class,'taggable');
+    }
+
+
+    public static function AllPosts(){
+        return app(Pipeline::class)
+            ->send(Post::query())
+            ->through([
+                Even::class,
+                Sort::class,
+                MaxCount::class
+            ])
+            ->thenReturn()
+            ->paginate(5);
     }
 }

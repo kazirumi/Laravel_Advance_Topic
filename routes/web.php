@@ -33,6 +33,7 @@ Route::get('/', function () {
 
 Route::get('channels',[ChannelController::class,'index']);
 Route::get('postForm',[PostController::class,'create']);
+Route::get('posts',[PostController::class,'index']);
 
 // facades example
 Route::get('postcards',function (){
@@ -44,3 +45,5 @@ Route::get('postcards',function (){
 Route::get('/facades',function (){
     Postcard::hello('This is from Facades CHill!!!!','rumi@gmail.com');
 });
+
+
